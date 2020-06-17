@@ -17,14 +17,13 @@
                 reader.readAsText(item);
 
                 reader.onload = function(){
-                    var paper_contents = document.getElementById('paper_contents');
-                    paper_contents.textContent = null;
                     var content = reader.result;
                     contents = content.split('@');
                     console.log(contents.length);
+                    var paper_infos = [];
                     for(var i=1;i<contents.length;i++){
-                        console.log('-------------',i,'-------------')
-                        console.log(contents[i]);
+                        //console.log('-------------',i,'-------------')
+                        //console.log(contents[i]);
                         if(/(inproceedings|inProc.\\|InProc.|article|book)/g.exec(contents) == null)continue;
                         var id = /(inproceedings|inProc.\|InProc.|article|book)\{(.*?),/g.exec(contents[i]);
                         var title = /\s*title\s*=\s*(\{{1,2}|\")(.*?)(\}{1,2}|\")/g.exec(contents[i]);
@@ -33,56 +32,79 @@
                         var booktitle = /booktitle\s*=\s*(\{|\")(.*?)(\}|\")/g.exec(contents[i]);
                         var year = /year\s*=\s*\{?\"?(.*?)(\"|\})/g.exec(contents[i]);
 
-                        
-                        var tr = document.createElement('tr');
+                        var paper_info = {
+                            id: id,
+                            title: title,
+                            authors: authors,
+                            url: url,
+                            booktitle: booktitle,
+                            year: year
+                        };
 
-                        var title_th = document.createElement('th');
-                        if(title != null){
-                            title_th.innerHTML = title[2];
-                        }else{
-                            title_th.innerHTML = "";
-                        }
-                        tr.appendChild(title_th);
-                        
-                        var author_th = document.createElement('th');
-                        if(authors != null){
-                            author_th.innerHTML = authors[2];
-                        }else{
-                            author_th.innerHTML = ""; 
-                        }
-                        tr.appendChild(author_th);
-                        
-                        var conf_th = document.createElement('th');
-                        if(booktitle != null){
-                            conf_th.innerHTML = booktitle[2];
-                        }else{
-                            conf_th.innerHTML = "";
-                        }
-                        tr.appendChild(conf_th);
-
-                        var year_th = document.createElement('th');
-                        if(year != null){
-                            year_th.innerHTML = year[1];
-                        }else{
-                            year_th.innerHTML = "";
-                        }
-                        tr.appendChild(year_th);
-
-                        var link_th = document.createElement('th');
-                        if(url != null){
-                            link_th.innerHTML = '<a href="'+url[1]+'" target=_"blank_">LINK</a>';
-                        }else{
-                            link_th.innerHTML = '';
-                        }
-                        tr.appendChild(link_th);
-                        
-
-                        paper_contents.appendChild(tr);
-
-
-
+                        //console.log(paper_infos);
+                        paper_infos.push(paper_info);
                     }
+                    var ascending_checkbox_status = document.getElementById('ascending').checked;
+                    if(ascending_checkbox_status){
+                        console.log('aceeeeeeeeee');
+                        paper_infos = paper_infos.sort(function(a, b){
+                            if(a.year[1] < b.year[1])return 1;
+                            if(a.year[1] > b.year[1])return -1;
+                            return 0;
+                        });
+                    }
+                    for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year[1]);
+                    construct_content(paper_infos);
+                }
+            }
 
+            function construct_content(paper_infos){
+                var paper_contents = document.getElementById('paper_contents');
+                paper_contents.textContent = null;
+                for(var i=0;i<paper_infos.length;i++){
+                    var tr = document.createElement('tr');
+
+                    var title_th = document.createElement('th');
+                    if(paper_infos[i].title != null){
+                        title_th.innerHTML = paper_infos[i].title[2];
+                    }else{
+                        title_th.innerHTML = "";
+                    }
+                    tr.appendChild(title_th);
+                    
+                    var author_th = document.createElement('th');
+                    if(paper_infos[i].authors != null){
+                        author_th.innerHTML = paper_infos[i].authors[2];
+                    }else{
+                        author_th.innerHTML = ""; 
+                    }
+                    tr.appendChild(author_th);
+                    
+                    var conf_th = document.createElement('th');
+                    if(paper_infos[i].booktitle != null){
+                        conf_th.innerHTML = paper_infos[i].booktitle[2];
+                    }else{
+                        conf_th.innerHTML = "";
+                    }
+                    tr.appendChild(conf_th);
+
+                    var year_th = document.createElement('th');
+                    if(paper_infos[i].year != null){
+                        year_th.innerHTML = paper_infos[i].year[1];
+                    }else{
+                        year_th.innerHTML = "";
+                    }
+                    tr.appendChild(year_th);
+
+                    var link_th = document.createElement('th');
+                    if(paper_infos[i].url != null){
+                        link_th.innerHTML = '<a href="'+paper_infos[i].url[1]+'" target=_"blank_">LINK</a>';
+                    }else{
+                        link_th.innerHTML = '';
+                    }
+                    tr.appendChild(link_th);
+                    
+                    paper_contents.appendChild(tr);
                 }
             }
             
@@ -102,6 +124,8 @@
         
         <div class="container-fluid">
             <input type="file" id="getfile" onchange="readContext()">←bibファイルを入れてください
+            <br><br>
+            <input type="checkbox" id="ascending" style="margin:5px 0px" onchange="readContext()">ascending order
              <table class="table table-striped">
                 <thead>
                     <tr>
