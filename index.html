@@ -33,12 +33,12 @@
                         var year = /year\s*=\s*\{?\"?(.*?)(\"|\})/g.exec(contents[i]);
 
                         var paper_info = {
-                            id: id,
-                            title: title,
-                            authors: authors,
-                            url: url,
-                            booktitle: booktitle,
-                            year: year
+                            id: (id==null?"":id[1]),
+                            title: (title==null?"":title[2]),
+                            authors: (authors==null?"":authors[2]),
+                            url: (url==null?"":url[1]),
+                            booktitle: (booktitle==null?"":booktitle[2]),
+                            year: (year==null?"":year[1])
                         };
 
                         //console.log(paper_infos);
@@ -47,12 +47,12 @@
                     var sort_year_checkbox_status = document.getElementById('sort_year').checked;
                     if(sort_year_checkbox_status){
                         paper_infos = paper_infos.sort(function(a, b){
-                            if(a.year[1] < b.year[1])return 1;
-                            if(a.year[1] > b.year[1])return -1;
+                            if(a.year < b.year)return 1;
+                            if(a.year > b.year)return -1;
                             return 0;
                         });
                     }
-                    for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year[1]);
+                    //for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year);
                     construct_content(paper_infos);
                 }
             }
@@ -65,7 +65,7 @@
 
                     var title_th = document.createElement('th');
                     if(paper_infos[i].title != null){
-                        title_th.innerHTML = paper_infos[i].title[2];
+                        title_th.innerHTML = paper_infos[i].title;
                     }else{
                         title_th.innerHTML = "";
                     }
@@ -73,7 +73,7 @@
                     
                     var author_th = document.createElement('th');
                     if(paper_infos[i].authors != null){
-                        author_th.innerHTML = paper_infos[i].authors[2];
+                        author_th.innerHTML = paper_infos[i].authors;
                     }else{
                         author_th.innerHTML = ""; 
                     }
@@ -81,7 +81,7 @@
                     
                     var conf_th = document.createElement('th');
                     if(paper_infos[i].booktitle != null){
-                        conf_th.innerHTML = paper_infos[i].booktitle[2];
+                        conf_th.innerHTML = paper_infos[i].booktitle;
                     }else{
                         conf_th.innerHTML = "";
                     }
@@ -89,15 +89,15 @@
 
                     var year_th = document.createElement('th');
                     if(paper_infos[i].year != null){
-                        year_th.innerHTML = paper_infos[i].year[1];
+                        year_th.innerHTML = paper_infos[i].year;
                     }else{
                         year_th.innerHTML = "";
                     }
                     tr.appendChild(year_th);
 
                     var link_th = document.createElement('th');
-                    if(paper_infos[i].url != null){
-                        link_th.innerHTML = '<a href="'+paper_infos[i].url[1]+'" target=_"blank_">LINK</a>';
+                    if(paper_infos[i].url != ""){
+                        link_th.innerHTML = '<a href="'+paper_infos[i].url+'" target=_"blank_">LINK</a>';
                     }else{
                         link_th.innerHTML = '';
                     }
