@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>repading paper counfortable</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <script type="text/javascript">
+            function readContext(){
+                var item = document.getElementById('getfile').files[0];
+                var reader = new FileReader();
+                reader.readAsText(item);
+
+                reader.onload = function(){
+                    var paper_contents = document.getElementById('paper_contents');
+                    paper_contents.textContent = null;
+                    var content = reader.result;
+                    contents = content.split('@');
+                    console.log(contents.length);
+                    for(var i=1;i<contents.length;i++){
+                        console.log('-------------',i,'-------------')
+                        console.log(contents[i]);
+                        if(/(inproceedings|inProc.\\|InProc.|article|book)/g.exec(contents) == null)continue;
+                        var id = /(inproceedings|inProc.\|InProc.|article|book)\{(.*?),/g.exec(contents[i]);
+                        var title = /\s*title\s*=\s*(\{{1,2}|\")(.*?)(\}{1,2}|\")/g.exec(contents[i]);
+                        var authors = /author\s*=\s*(\{|\")(.*?)(\"|\}),/s.exec(contents[i]);
+                        var url = /url\s*=\s*\"?\{?(.*?)(\"|\})/g.exec(contents[i]);
+                        var booktitle = /booktitle\s*=\s*(\{|\")(.*?)(\}|\")/g.exec(contents[i]);
+                        var year = /year\s*=\s*\{?\"?(.*?)(\"|\})/g.exec(contents[i]);
+
+                        
+                        var tr = document.createElement('tr');
+
+                        var title_th = document.createElement('th');
+                        if(title != null){
+                            title_th.innerHTML = title[2];
+                        }else{
+                            title_th.innerHTML = "";
+                        }
+                        tr.appendChild(title_th);
+                        
+                        var author_th = document.createElement('th');
+                        if(authors != null){
+                            author_th.innerHTML = authors[2];
+                        }else{
+                            author_th.innerHTML = ""; 
+                        }
+                        tr.appendChild(author_th);
+                        
+                        var conf_th = document.createElement('th');
+                        if(booktitle != null){
+                            conf_th.innerHTML = booktitle[2];
+                        }else{
+                            conf_th.innerHTML = "";
+                        }
+                        tr.appendChild(conf_th);
+
+                        var year_th = document.createElement('th');
+                        if(year != null){
+                            year_th.innerHTML = year[1];
+                        }else{
+                            year_th.innerHTML = "";
+                        }
+                        tr.appendChild(year_th);
+
+                        var link_th = document.createElement('th');
+                        if(url != null){
+                            link_th.innerHTML = '<a href="'+url[1]+'" target=_"blank_">LINK</a>';
+                        }else{
+                            link_th.innerHTML = '';
+                        }
+                        tr.appendChild(link_th);
+                        
+
+                        paper_contents.appendChild(tr);
+
+
+
+                    }
+
+                }
+            }
+            
+            
+        </script>
+    </head>
+    
+
+    <body>
+        <nav class="navbar navbar-expand-sm sticky-top navbar-dark bg-dark my-3">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">論文読み読み</a>
+        </nav>
+
+        
+        <div class="container-fluid">
+            <input type="file" id="getfile" onchange="readContext()">←bibファイルを入れてください
+             <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Authors</th>
+                        <th>Conference</th>
+                        <th>year</th>
+                        <th>LINK</th>
+                    </tr>
+                </thead>
+                <tbody id='paper_contents'>
+
+                </tbody>
+             </table>
+        </div>
+
+    </body>
+
+</html>

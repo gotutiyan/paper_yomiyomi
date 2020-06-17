@@ -1,0 +1,94 @@
+@inproceedings{bryant-etal-2017-automatic,
+    title = "Automatic Annotation and Evaluation of Error Types for Grammatical Error Correction",
+    author = "Bryant, Christopher  and
+      Felice, Mariano  and
+      Briscoe, Ted",
+    booktitle = "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2017",
+    address = "Vancouver, Canada",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/P17-1074",
+    doi = "10.18653/v1/P17-1074",
+    pages = "793--805",
+    abstract = "Until now, error type performance for Grammatical Error Correction (GEC) systems could only be measured in terms of recall because system output is not annotated. To overcome this problem, we introduce ERRANT, a grammatical ERRor ANnotation Toolkit designed to automatically extract edits from parallel original and corrected sentences and classify them according to a new, dataset-agnostic, rule-based framework. This not only facilitates error type evaluation at different levels of granularity, but can also be used to reduce annotator workload and standardise existing GEC datasets. Human experts rated the automatic edits as {``}Good{''} or {``}Acceptable{''} in at least 95{\%} of cases, so we applied ERRANT to the system output of the CoNLL-2014 shared task to carry out a detailed error type analysis for the first time.",
+}
+
+@inproceedings{grundkiewicz-etal-2019-neural,
+    title = "Neural Grammatical Error Correction Systems with Unsupervised Pre-training on Synthetic Data",
+    author = "Grundkiewicz, Roman  and
+      Junczys-Dowmunt, Marcin  and
+      Heafield, Kenneth",
+    booktitle = "Proceedings of the Fourteenth Workshop on Innovative Use of NLP for Building Educational Applications",
+    month = aug,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/W19-4427",
+    doi = "10.18653/v1/W19-4427",
+    pages = "252--263",
+    abstract = "Considerable effort has been made to address the data sparsity problem in neural grammatical error correction. In this work, we propose a simple and surprisingly effective unsupervised synthetic error generation method based on confusion sets extracted from a spellchecker to increase the amount of training data. Synthetic data is used to pre-train a Transformer sequence-to-sequence model, which not only improves over a strong baseline trained on authentic error-annotated data, but also enables the development of a practical GEC system in a scenario where little genuine error-annotated data is available. The developed systems placed first in the BEA19 shared task, achieving 69.47 and 64.24 F$_{0.5}$ in the restricted and low-resource tracks respectively, both on the W{\&}I+LOCNESS test set. On the popular CoNLL 2014 test set, we report state-of-the-art results of 64.16 M{\mbox{$^2$}} for the submitted system, and 61.30 M{\mbox{$^2$}} for the constrained system trained on the NUCLE and Lang-8 data.",
+}
+
+@inproceedings{kiyono-etal-2019-empirical,
+    title = "An Empirical Study of Incorporating Pseudo Data into Grammatical Error Correction",
+    author = "Kiyono, Shun  and
+      Suzuki, Jun  and
+      Mita, Masato  and
+      Mizumoto, Tomoya  and
+      Inui, Kentaro",
+    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D19-1119",
+    doi = "10.18653/v1/D19-1119",
+    pages = "1236--1242",
+    abstract = "The incorporation of pseudo data in the training of grammatical error correction models has been one of the main factors in improving the performance of such models. However, consensus is lacking on experimental configurations, namely, choosing how the pseudo data should be generated or used. In this study, these choices are investigated through extensive experiments, and state-of-the-art performance is achieved on the CoNLL-2014 test set (F0.5=65.0) and the official test set of the BEA-2019 shared task (F0.5=70.2) without making any modifications to the model architecture.",
+}
+
+@inproceedings{xie-etal-2018-noising,
+    title = "Noising and Denoising Natural Language: Diverse Backtranslation for Grammar Correction",
+    author = "Xie, Ziang  and
+      Genthial, Guillaume  and
+      Xie, Stanley  and
+      Ng, Andrew  and
+      Jurafsky, Dan",
+    booktitle = "Proceedings of the 2018 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long Papers)",
+    month = jun,
+    year = "2018",
+    address = "New Orleans, Louisiana",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/N18-1057",
+    doi = "10.18653/v1/N18-1057",
+    pages = "619--628",
+    abstract = "Translation-based methods for grammar correction that directly map noisy, ungrammatical text to their clean counterparts are able to correct a broad range of errors; however, such techniques are bottlenecked by the need for a large parallel corpus of noisy and clean sentence pairs. In this paper, we consider synthesizing parallel data by noising a clean monolingual corpus. While most previous approaches introduce perturbations using features computed from local context windows, we instead develop error generation processes using a neural sequence transduction model trained to translate clean examples to their noisy counterparts. Given a corpus of clean examples, we propose beam search noising procedures to synthesize additional noisy examples that human evaluators were nearly unable to discriminate from nonsynthesized examples. Surprisingly, when trained on additional data synthesized using our best-performing noising scheme, our model approaches the same performance as when trained on additional nonsynthesized data.",
+}
+
+@inproceedings{zhao-etal-2019-improving,
+    title = "Improving Grammatical Error Correction via Pre-Training a Copy-Augmented Architecture with Unlabeled Data",
+    author = "Zhao, Wei  and
+      Wang, Liang  and
+      Shen, Kewei  and
+      Jia, Ruoyu  and
+      Liu, Jingming",
+    booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+    month = jun,
+    year = "2019",
+    address = "Minneapolis, Minnesota",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/N19-1014",
+    doi = "10.18653/v1/N19-1014",
+    pages = "156--165",
+    abstract = "Neural machine translation systems have become state-of-the-art approaches for Grammatical Error Correction (GEC) task. In this paper, we propose a copy-augmented architecture for the GEC task by copying the unchanged words from the source sentence to the target sentence. Since the GEC suffers from not having enough labeled training data to achieve high accuracy. We pre-train the copy-augmented architecture with a denoising auto-encoder using the unlabeled One Billion Benchmark and make comparisons between the fully pre-trained model and a partially pre-trained model. It is the first time copying words from the source context and fully pre-training a sequence to sequence model are experimented on the GEC task. Moreover, We add token-level and sentence-level multi-task learning for the GEC task. The evaluation results on the CoNLL-2014 test set show that our approach outperforms all recently published state-of-the-art results by a large margin.",
+}
+
+@inproceedings{vaswani2017attention,
+  title={Attention is all you need},
+  author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle={Advances in neural information processing systems},
+  pages={5998--6008},
+  url={https://arxiv.org/abs/1706.03762}
+  year={2017}
+}
