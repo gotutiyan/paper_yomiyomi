@@ -44,9 +44,8 @@
                         //console.log(paper_infos);
                         paper_infos.push(paper_info);
                     }
-                    var ascending_checkbox_status = document.getElementById('ascending').checked;
-                    if(ascending_checkbox_status){
-                        console.log('aceeeeeeeeee');
+                    var sort_year_checkbox_status = document.getElementById('sort_year').checked;
+                    if(sort_year_checkbox_status){
                         paper_infos = paper_infos.sort(function(a, b){
                             if(a.year[1] < b.year[1])return 1;
                             if(a.year[1] > b.year[1])return -1;
@@ -125,7 +124,7 @@
         <div class="container-fluid">
             <input type="file" id="getfile" onchange="readContext()">←bibファイルを入れてください
             <br><br>
-            <input type="checkbox" id="ascending" style="margin:5px 0px" onchange="readContext()">ascending order
+            <input type="checkbox" id="sort_year" style="margin:5px 0px" onchange="readContext()"> 年代をソート（降順）
              <table class="table table-striped">
                 <thead>
                     <tr>
