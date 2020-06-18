@@ -120,7 +120,7 @@
                     
                     var author_th = document.createElement('th');
                     if(paper_infos[i].authors != null){
-                        author_th.innerHTML = paper_infos[i].authors;
+                        author_th.innerHTML = paper_infos[i].authors.replace(/and/g, '<span class="gray small">and</span>');
                     }else{
                         author_th.innerHTML = ""; 
                     }
