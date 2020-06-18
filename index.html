@@ -66,6 +66,10 @@
                     //会議検索
                     search_str = document.getElementById('form_search_conf').value;
                     paper_infos = search_conf(paper_infos, search_str);
+
+                    //会議検索
+                    search_str = document.getElementById('form_search_year').value;
+                    paper_infos = search_year(paper_infos, search_str);
                     //for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year);
                     construct_content(paper_infos);
                 }
@@ -98,6 +102,17 @@
                 var regex = new RegExp(search_str);
                 for(var i=0;i<paper_infos.length;i++){
                     if(paper_infos[i].booktitle.match(regex) != null){
+                        new_paper_infos.push(paper_infos[i]);
+                    }
+                }
+                return new_paper_infos;
+            }
+
+            function search_year(paper_infos, search_str){
+                var new_paper_infos = [];
+                var regex = new RegExp(search_str);
+                for(var i=0;i<paper_infos.length;i++){
+                    if(paper_infos[i].year.match(regex) != null){
                         new_paper_infos.push(paper_infos[i]);
                     }
                 }
@@ -189,6 +204,11 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">会議の検索</label>
                 <input type="email" class="form-control" id="form_search_conf" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
+                <small class="text-muted"> </small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">年代の検索</label>
+                <input type="email" class="form-control" id="form_search_year" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
                 <small class="text-muted"> </small>
             </div>
             </form>
