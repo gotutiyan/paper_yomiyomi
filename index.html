@@ -26,21 +26,20 @@
                         //console.log(contents[i]);
                         if(/(inproceedings|inProc.\\|InProc.|article|book)/g.exec(contents) == null)continue;
                         var id = /(inproceedings|inProc.\|InProc.|article|book)\{(.*?),/g.exec(contents[i]);
-                        var title = /\s*title\s*=\s*(\{{1,2}|\")(.*?)(\}{1,2}|\"),?\n/g.exec(contents[i]);
-                        var authors = /author\s*=\s*(\{|\")(.*?)(\"|\}),?\n/s.exec(contents[i]);
-                        var url = /url\s*=\s*\"?\{?(.*?)(\"|\}),?\n/g.exec(contents[i]);
-                        var booktitle = /booktitle\s*=\s*(\{|\")(.*?)(\}|\"),?\n/g.exec(contents[i]);
-                        var year = /year\s*=\s*\{?\"?(.*?)(\"|\}),?\n/g.exec(contents[i]);
+                        var title = /\stitle\s*=\s*(\{{1,2}|\")(.*?)(\}{1,2}|\"),?(\n|\r)/g.exec(contents[i]);
+                        var authors = /author\s*=\s*(\{|\")(.*?)(\}|\"),?(\n|\r)/s.exec(contents[i]);
+                        var url = /url\s*=\s*\"?\{?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
+                        var booktitle = /(booktitle|journal)\s*=\s*(\{|\")(.*?)(\}|\"),?(\n|\r)/g.exec(contents[i]);
+                        var year = /year\s*=\s*\{?\"?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
 
                         var paper_info = {
-                            id: (id==null?"":id[1]),
+                            id: (id==null?"":id[2]),
                             title: (title==null?"":title[2]),
                             authors: (authors==null?"":authors[2]),
                             url: (url==null?"":url[1]),
-                            booktitle: (booktitle==null?"":booktitle[2]),
+                            booktitle: (booktitle==null?"":booktitle[3]),
                             year: (year==null?"":year[1])
                         };
-
                         //console.log(paper_infos);
                         paper_infos.push(paper_info);
                     }
@@ -67,7 +66,7 @@
                     search_str = document.getElementById('form_search_conf').value;
                     paper_infos = search_conf(paper_infos, search_str);
 
-                    //会議検索
+                    //年代検索
                     search_str = document.getElementById('form_search_year').value;
                     paper_infos = search_year(paper_infos, search_str);
                     //for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year);
