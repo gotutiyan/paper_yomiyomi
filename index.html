@@ -26,11 +26,11 @@
                         //console.log(contents[i]);
                         if(/(inproceedings|inProc.\\|InProc.|article|book)/g.exec(contents) == null)continue;
                         var id = /(inproceedings|inProc.\|InProc.|article|book)\{(.*?),/g.exec(contents[i]);
-                        var title = /\s*title\s*=\s*(\{{1,2}|\")(.*?)(\}{1,2}|\")/g.exec(contents[i]);
-                        var authors = /author\s*=\s*(\{|\")(.*?)(\"|\}),/s.exec(contents[i]);
-                        var url = /url\s*=\s*\"?\{?(.*?)(\"|\})/g.exec(contents[i]);
-                        var booktitle = /booktitle\s*=\s*(\{|\")(.*?)(\}|\")/g.exec(contents[i]);
-                        var year = /year\s*=\s*\{?\"?(.*?)(\"|\})/g.exec(contents[i]);
+                        var title = /\s*title\s*=\s*(\{{1,2}|\")(.*?)(\}{1,2}|\"),?\n/g.exec(contents[i]);
+                        var authors = /author\s*=\s*(\{|\")(.*?)(\"|\}),?\n/s.exec(contents[i]);
+                        var url = /url\s*=\s*\"?\{?(.*?)(\"|\}),?\n/g.exec(contents[i]);
+                        var booktitle = /booktitle\s*=\s*(\{|\")(.*?)(\}|\"),?\n/g.exec(contents[i]);
+                        var year = /year\s*=\s*\{?\"?(.*?)(\"|\}),?\n/g.exec(contents[i]);
 
                         var paper_info = {
                             id: (id==null?"":id[1]),
