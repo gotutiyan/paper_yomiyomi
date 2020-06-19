@@ -84,9 +84,9 @@
 
             function search_paper_info(paper_infos, target_column, search_str){
                 var new_paper_infos = [];
-                var regex = new RegExp(search_str);
+                var regex = new RegExp(search_str.toLowerCase());
                 for(var i=0;i<paper_infos.length;i++){
-                    if(paper_infos[i][target_column].match(regex) != null){
+                    if(paper_infos[i][target_column].toLowerCase().match(regex) != null){
                         new_paper_infos.push(paper_infos[i]);
                     }
                 }
@@ -164,7 +164,7 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">タイトルの検索</label>
                 <input type="email" class="form-control" id="search_title" placeholder="検索する文字列を指定(ex. Neural)" onchange="readContext()">
-                <small class="text-muted">正規表現も使用できます．(^Neural, Neural|Attention) など</small>
+                <small class="text-muted">検索には正規表現が使用できます．また，大文字小文字を区別しません．</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">著者の検索</label>
