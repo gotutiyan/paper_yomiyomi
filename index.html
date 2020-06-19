@@ -41,7 +41,7 @@
                             year: (year==null?"":year[1])
                         };
                         //console.log(paper_infos);
-                        paper_infos.push(paper_info);
+                        paper_infos.push(process_paper_info(paper_info));
                     }
 
                     //年代でソート
@@ -72,6 +72,14 @@
                     //for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year);
                     construct_content(paper_infos);
                 }
+            }
+
+            function process_paper_info(paper_info){
+                paper_info.title = paper_info.title.replace(/({|})/g, '');
+                paper_info.authors = paper_info.authors.replace(/({|})/g, '');
+                paper_info.booktitle = paper_info.booktitle.replace(/({|})/g, '');
+
+                return paper_info;
             }
 
             function search_title(paper_infos, search_str){
@@ -134,7 +142,7 @@
                     
                     var author_th = document.createElement('th');
                     if(paper_infos[i].authors != null){
-                        author_th.innerHTML = paper_infos[i].authors.replace(/\sand\s/g, '<span class="gray small">and</span>');
+                        author_th.innerHTML = paper_infos[i].authors.replace(/\sand\s/g, '<span class="gray small"> and </span>');
                     }else{
                         author_th.innerHTML = ""; 
                     }
