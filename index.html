@@ -56,19 +56,19 @@
 
                     // タイトル検索
                     var search_str = document.getElementById('search_title').value;
-                    paper_infos = search_title(paper_infos, search_str);
+                    paper_infos = search_paper_info(paper_infos, 'title', search_str);
 
                     //著者検索
                     search_str = document.getElementById('form_search_author').value;
-                    paper_infos = search_author(paper_infos, search_str);
+                    paper_infos = search_paper_info(paper_infos, 'authors', search_str);
 
                     //会議検索
                     search_str = document.getElementById('form_search_conf').value;
-                    paper_infos = search_conf(paper_infos, search_str);
+                    paper_infos = search_paper_info(paper_infos, 'booktitle', search_str);
 
                     //年代検索
                     search_str = document.getElementById('form_search_year').value;
-                    paper_infos = search_year(paper_infos, search_str);
+                    paper_infos = search_paper_info(paper_infos, 'year', search_str);
                     //for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year);
                     construct_content(paper_infos);
                 }
@@ -82,44 +82,11 @@
                 return paper_info;
             }
 
-            function search_title(paper_infos, search_str){
+            function search_paper_info(paper_infos, target_column, search_str){
                 var new_paper_infos = [];
                 var regex = new RegExp(search_str);
                 for(var i=0;i<paper_infos.length;i++){
-                    if(paper_infos[i].title.match(regex) != null){
-                        new_paper_infos.push(paper_infos[i]);
-                    }
-                }
-                return new_paper_infos;
-            }
-
-            function search_author(paper_infos, search_str){
-                var new_paper_infos = [];
-                var regex = new RegExp(search_str);
-                for(var i=0;i<paper_infos.length;i++){
-                    if(paper_infos[i].authors.match(regex) != null){
-                        new_paper_infos.push(paper_infos[i]);
-                    }
-                }
-                return new_paper_infos;
-            }
-
-            function search_conf(paper_infos, search_str){
-                var new_paper_infos = [];
-                var regex = new RegExp(search_str);
-                for(var i=0;i<paper_infos.length;i++){
-                    if(paper_infos[i].booktitle.match(regex) != null){
-                        new_paper_infos.push(paper_infos[i]);
-                    }
-                }
-                return new_paper_infos;
-            }
-
-            function search_year(paper_infos, search_str){
-                var new_paper_infos = [];
-                var regex = new RegExp(search_str);
-                for(var i=0;i<paper_infos.length;i++){
-                    if(paper_infos[i].year.match(regex) != null){
+                    if(paper_infos[i][target_column].match(regex) != null){
                         new_paper_infos.push(paper_infos[i]);
                     }
                 }
