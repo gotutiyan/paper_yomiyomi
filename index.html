@@ -55,7 +55,7 @@
                     }
 
                     // タイトル検索
-                    var search_str = document.getElementById('search_title').value;
+                    var search_str = document.getElementById('form_search_title').value;
                     paper_infos = search_paper_info(paper_infos, 'title', search_str);
 
                     //著者検索
@@ -63,7 +63,7 @@
                     paper_infos = search_paper_info(paper_infos, 'authors', search_str);
 
                     //会議検索
-                    search_str = document.getElementById('form_search_conf').value;
+                    search_str = document.getElementById('form_search_booktitle').value;
                     paper_infos = search_paper_info(paper_infos, 'booktitle', search_str);
 
                     //年代検索
@@ -107,9 +107,9 @@
                     author_th.innerHTML = paper_infos[i].authors.replace(/\sand\s/g, '<span class="gray small"> and </span>');
                     tr.appendChild(author_th);
                     
-                    var conf_th = document.createElement('th');
-                    conf_th.innerHTML = paper_infos[i].booktitle;
-                    tr.appendChild(conf_th);
+                    var booktitle_th = document.createElement('th');
+                    booktitle_th.innerHTML = paper_infos[i].booktitle;
+                    tr.appendChild(booktitle_th);
 
                     var year_th = document.createElement('th');
                     year_th.innerHTML = paper_infos[i].year;
@@ -147,7 +147,7 @@
             <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">タイトルの検索</label>
-                <input type="email" class="form-control" id="search_title" placeholder="検索する文字列を指定(ex. Neural)" onchange="readContext()">
+                <input type="email" class="form-control" id="form_search_title" placeholder="検索する文字列を指定(ex. Neural)" onchange="readContext()">
                 <small class="text-muted">検索には正規表現が使用できます．また，大文字小文字を区別しません．</small>
             </div>
             <div class="form-group">
@@ -157,7 +157,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">会議の検索</label>
-                <input type="email" class="form-control" id="form_search_conf" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
+                <input type="email" class="form-control" id="form_search_booktitle" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
                 <small class="text-muted"> </small>
             </div>
             <div class="form-group">
@@ -176,8 +176,8 @@
                         <th>Title</th>
                         <th>Authors</th>
                         <th>Conference</th>
-                        <th>year</th>
-                        <th>LINK</th>
+                        <th>Year</th>
+                        <th>Link</th>
                     </tr>
                 </thead>
                 <tbody id='paper_contents'>
