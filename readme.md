@@ -4,7 +4,7 @@
 
 ### GitHub Pages
 
-[こちら](https://gotutiyan.github.io/reading_paper_counfortable/index.html)
+[こちら](https://gotutiyan.github.io/paper_yomiyomi/)
 
 
 
