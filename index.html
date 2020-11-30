@@ -31,6 +31,7 @@
                         var url = /url\s*=\s*\"?\{?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
                         var booktitle = /(booktitle|journal)\s*=\s*(\{|\")(.*?)(\}|\"),?(\n|\r)/g.exec(contents[i]);
                         var year = /year\s*=\s*\{?\"?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
+                        var comment = /comment\s*=\s*\{?\"?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
 
                         var paper_info = {
                             id: (id==null?"":id[2]),
@@ -38,7 +39,8 @@
                             authors: (authors==null?"":authors[2]),
                             url: (url==null?"":url[1]),
                             booktitle: (booktitle==null?"":booktitle[3]),
-                            year: (year==null?"":year[1])
+                            year: (year==null?"":year[1]),
+                            comment: (comment==null?"":comment[1])
                         };
                         //console.log(paper_infos);
                         paper_infos.push(process_paper_info(paper_info));
@@ -122,6 +124,10 @@
                         link_th.innerHTML = '';
                     }
                     tr.appendChild(link_th);
+
+                    var comment_th = document.createElement('th');
+                    comment_th.innerHTML = paper_infos[i].comment;
+                    tr.appendChild(comment_th);
                     
                     paper_contents.appendChild(tr);
                 }
@@ -196,6 +202,7 @@
                         <th>Conference</th>
                         <th>Year</th>
                         <th>Link</th>
+                        <th style="width:30%">Comment</th>
                     </tr>
                 </thead>
                 <tbody id='paper_contents'>
