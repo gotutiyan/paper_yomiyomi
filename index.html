@@ -159,6 +159,8 @@
                     <a class="dropdown-item" href="https://ci.nii.ac.jp" target="_blank_">CiNii</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="https://www.aclweb.org/anthology/" target="_blank_">ACL Anthology</a>
+                    <a class="dropdown-item" href="https://www.anlp.jp/guide/nenji_proceedings.html" target="_blank_">言語処理学会論文集</a>
+
                 </div>
                 </li>
             </div>
@@ -170,29 +172,30 @@
             <br><br>
             <form>
             <div class="form-group">
-                <label for="exampleInputEmail1">タイトルの検索</label>
-                <input type="email" class="form-control" id="form_search_title" placeholder="検索する文字列を指定(ex. Neural)" onchange="readContext()">
+                <label for="TitleInput">タイトルの検索</label>
+                <input type="text" class="form-control" id="form_search_title" placeholder="検索する文字列を指定(ex. Neural)" onchange="readContext()">
                 <small class="text-muted">検索には正規表現が使用できます．また，大文字小文字を区別しません．</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">著者の検索</label>
-                <input type="email" class="form-control" id="form_search_author" placeholder="検索する文字列を指定(ex. Smith)" onchange="readContext()">
+                <input type="text" class="form-control" id="form_search_author" placeholder="検索する文字列を指定(ex. Smith)" onchange="readContext()">
                 <small class="text-muted"> </small>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">会議の検索</label>
-                <input type="email" class="form-control" id="form_search_booktitle" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
+                <input type="text" class="form-control" id="form_search_booktitle" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
                 <small class="text-muted"> </small>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">年代の検索</label>
-                <input type="email" class="form-control" id="form_search_year" placeholder="検索する文字列を指定(ex. 2000)" onchange="readContext()">
+                <input type="text" class="form-control" id="form_search_year" placeholder="検索する文字列を指定(ex. 2000)" onchange="readContext()">
                 <small class="text-muted"> </small>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="sort_year" onchange="readContext()">
+                    <label class="form-check-label" for="exampleCheck1">降順に</label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="sort_year" onchange="readContext()">
-                <label class="form-check-label" for="exampleCheck1">年代をソート（降順）</label>
-            </div>
+            
             </form>
              <table class="table table-striped">
                 <thead>
