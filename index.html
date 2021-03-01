@@ -21,6 +21,7 @@
                     contents = content.split('@');
                     console.log(contents.length);
                     var paper_infos = [];
+                    var commented = 0
                     for(var i=1;i<contents.length;i++){
                         //console.log('-------------',i,'-------------')
                         //console.log(contents[i]);
@@ -32,6 +33,7 @@
                         var booktitle = /(booktitle|journal)\s*=\s*(\{|\")(.*?)(\}|\"),?(\n|\r)/g.exec(contents[i]);
                         var year = /year\s*=\s*\{?\"?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
                         var comment = /comment\s*=\s*\{?\"?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
+                        if(comment != null && comment != "") commented += 1
 
                         var paper_info = {
                             id: (id==null?"":id[2]),
@@ -45,6 +47,9 @@
                         //console.log(paper_infos);
                         paper_infos.push(process_paper_info(paper_info));
                     }
+
+                    var number_of_elem = document.getElementById('number_of')
+                    number_of_elem.innerHTML = 'Number of papers: ' + (contents.length-1) + '(commented: ' + commented + ')' 
 
                     //年代でソート
                     var sort_year_checkbox_status = document.getElementById('sort_year').checked;
@@ -194,6 +199,9 @@
                     <input type="checkbox" class="form-check-input" id="sort_year" onchange="readContext()">
                     <label class="form-check-label" for="exampleCheck1">降順に</label>
                 </div>
+            </div>
+            <div>
+                <p id='number_of'></p>
             </div>
             
             </form>
