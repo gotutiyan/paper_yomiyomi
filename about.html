@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>論文読み読み</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    
+
+    <body>
+        <nav class="navbar navbar-expand-sm sticky-top navbar-dark bg-dark my-3">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="./index.html"><img src="./favicon.ico" width=30px, height=30px> 論文読み読み</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./about.html">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://github.com/gotutiyan/reading_paper_counfortable">GitHub</a>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    リンク集
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="https://scholar.google.com" target="_blank_">Google Scholar</a>
+                    <a class="dropdown-item" href="https://ci.nii.ac.jp" target="_blank_">CiNii</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="https://www.aclweb.org/anthology/" target="_blank_">ACL Anthology</a>
+                    <a class="dropdown-item" href="https://www.anlp.jp/guide/nenji_proceedings.html" target="_blank_">言語処理学会論文集</a>
+
+                </div>
+                </li>
+            </div>
+        </nav>
+
+        <div class="content" style="margin: 0em auto; width:50%">
+            <h1>「論文読み読み」は何ができるか</h1>
+            <p>
+                Bib形式で記述されている文献情報を良い感じのフォーマットで表示することができます．文献のタイトルや著者などを検索することもできます．また，Bibの属性として<code>comment=</code>を独自に導入し，個人的な論文の要約や著者実装などへのリンクをHTMLライクに記述できます．
+            </p>
+            <p>
+                例えば，文献情報が以下のように用意されていたとします．
+           <pre><code>
+@article{vaswani2017attention,
+    title={Attention is all you need},
+    author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, Lukasz and Polosukhin, Illia},
+    journal={arXiv preprint arXiv:1706.03762},
+    year={2017},
+    url={https://arxiv.org/abs/1706.03762},
+    comment = "これは「論文読み読み」のためのサンプルコメントです．<a href = 'google.com'>google</a>",
+}</code></pre>
+                これは深層学習の分野では有名な，とある論文の情報です．<code>comment=</code>属性は本来Bibにはありませんが，本ツールのために独自に付け加えています．前述した通り，ここには個人的に作成した論文の要約や，関連するリンクをHTMLライクで記述できます．これを本ツールに入力すると，以下のようになります．
+                
+            </p>
+            <img src="./sample.png" width=100%>
+            <p>
+                今のところ，タイトル，著者，会議名（雑誌名なども含む），年代，リンク，コメントが表示されるようになっています．リンクには<code>url=</code>属性に記述されたリンクに飛ぶようになっています．
+            </p>
+
+            <h1>「論文読み読み」の利点</h1>
+            本ツールの利点は，以下の3点でしょう．
+            <ol>
+                <li>
+                    <b>Bibを可視化できる</b>
+                    <br>
+                    Bibには文献情報を集約できますが，人にとっての視認性は低いです．本ツールを使用することで，情報をより見やすいフォーマットで可視化できます．
+                </li>
+                <li>
+                    <b>文献にすぐアクセスできる</b>
+                    <br>
+                    タイトルを完璧に記憶している文献であっても，そのPDFにアクセスするのはある程度の数のステップを踏むため面倒です．あらかじめPDFをダウンロードしていても，数が増えると管理が困難です．本ツールでは，Bibの<code>url=</code>属性にリンクを記載していれば，すぐに論文のPDFにアクセスできます．
+                </li>
+                <li>
+                    <b>文献にコメントを付与できる</b>
+                    <br>
+                    文献を読んだのであれば，少しでも自分の言葉でコメントを残しておくと後の自分にとって役に立つことが予想されます．Bibに<code>comment=</code>属性として記述しておけば，本ツールで可視化した際に文献のアウトラインがすぐに分かります．コメントの内容で検索もできるので，フワッとした記憶からの文献検索も可能になることが期待されます．
+                </li>
+            </ol>
+            <h1>要望・バグ報告など</h1>
+            <p>
+                GitHubにてIssueとしてお願いいたします（必ず反映されるとは限りません）．
+            </p>
+            <h1>免責事項</h1>
+            <p>
+                本ツールの使用により発生したいかなる損害も，ツールの作成者は一切責任を負いません．
+            </p>
+        </div>
+
+    </body>
+
+</html>
