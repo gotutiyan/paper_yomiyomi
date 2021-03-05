@@ -48,9 +48,6 @@
                         paper_infos.push(process_paper_info(paper_info));
                     }
 
-                    var number_of_elem = document.getElementById('number_of')
-                    number_of_elem.innerHTML = 'Number of papers: ' + (contents.length-1) + '(commented: ' + commented + ')' 
-
                     //年代でソート
                     var sort_year_checkbox_status = document.getElementById('sort_year').checked;
                     if(sort_year_checkbox_status){
@@ -76,7 +73,15 @@
                     //年代検索
                     search_str = document.getElementById('form_search_year').value;
                     paper_infos = search_paper_info(paper_infos, 'year', search_str);
-                    //for(var i=0;i<paper_infos.length;i++)console.log(paper_infos[i].year);
+
+                    //コメント検索
+                    search_str = document.getElementById('form_search_comment').value;
+                    paper_infos = search_paper_info(paper_infos, 'comment', search_str);
+
+                    var number_of_elem = document.getElementById('number_of');
+                    var n_commented = count_commented(paper_infos);
+                    number_of_elem.innerHTML = 'Number of papers: ' + (paper_infos.length) + ' (commented: ' + n_commented + ')';
+
                     construct_content(paper_infos);
                 }
             }
@@ -85,7 +90,6 @@
                 paper_info.title = paper_info.title.replace(/({|})/g, '');
                 paper_info.authors = paper_info.authors.replace(/({|})/g, '');
                 paper_info.booktitle = paper_info.booktitle.replace(/({|})/g, '');
-
                 return paper_info;
             }
 
@@ -98,6 +102,14 @@
                     }
                 }
                 return new_paper_infos;
+            }
+
+            function count_commented(paper_infos){
+                var n_commented = 0;
+                for(var i=0;i<paper_infos.length;i++){
+                    if(paper_infos[i].comment != "")n_commented++;
+                }
+                return n_commented;
             }
 
             function construct_content(paper_infos){
@@ -175,45 +187,53 @@
         <div class="container-fluid">
             <input type="file" id="getfile" onchange="readContext()">←bibファイルを入れてください
             <br><br>
-            <form>
-            <div class="form-group">
-                <label for="TitleInput">タイトルの検索</label>
-                <input type="text" class="form-control" id="form_search_title" placeholder="検索する文字列を指定(ex. Neural)" onchange="readContext()">
-                <small class="text-muted">検索には正規表現が使用できます．また，大文字小文字を区別しません．</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">著者の検索</label>
-                <input type="text" class="form-control" id="form_search_author" placeholder="検索する文字列を指定(ex. Smith)" onchange="readContext()">
-                <small class="text-muted"> </small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">会議の検索</label>
-                <input type="text" class="form-control" id="form_search_booktitle" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
-                <small class="text-muted"> </small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">年代の検索</label>
-                <input type="text" class="form-control" id="form_search_year" placeholder="検索する文字列を指定(ex. 2000)" onchange="readContext()">
-                <small class="text-muted"> </small>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="sort_year" onchange="readContext()">
-                    <label class="form-check-label" for="exampleCheck1">降順に</label>
-                </div>
-            </div>
             <div>
                 <p id='number_of'></p>
             </div>
-            
-            </form>
+            <div>
+                <p>検索には正規表現が使用できます．また，大文字小文字を区別しません．</p>
+            </div>
              <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Title</th>
                         <th>Authors</th>
-                        <th>Conference</th>
-                        <th>Year</th>
+                        <th>Conference / Booktitle</th>
+                        <th style="width:7%">Year</th>
                         <th>Link</th>
                         <th style="width:30%">Comment</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="form_search_title" placeholder="検索する文字列を指定(ex. Neural)" onchange="readContext()">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="form_search_author" placeholder="検索する文字列を指定(ex. Smith)" onchange="readContext()">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="form_search_booktitle" placeholder="検索する文字列を指定(ex. NIPS)" onchange="readContext()">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="form_search_year" placeholder="検索する文字列を指定(ex. 2000)" onchange="readContext()">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="sort_year" onchange="readContext()">
+                                    <label class="form-check-label" for="exampleCheck1">降順に</label>
+                                </div>
+                            </div>
+                        </th>
+                        <th></th>
+                        <th>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="form_search_comment" placeholder="検索する文字列を指定" onchange="readContext()">
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody id='paper_contents'>
