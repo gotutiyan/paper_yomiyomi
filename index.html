@@ -26,7 +26,7 @@
                         //console.log('-------------',i,'-------------')
                         //console.log(contents[i]);
                         if(/(inproceedings|inProc.\\|InProc.|article|book)/g.exec(contents) == null)continue;
-                        var id = /(inproceedings|inProc.\|InProc.|article|book)\{(.*?),/g.exec(contents[i]);
+                        var id = /(.*?)\{(.*?),/g.exec(contents[i]);
                         var title = /\stitle\s*=\s*(\{{1,2}|\")(.*?)(\}{1,2}|\"),?(\n|\r)/g.exec(contents[i]);
                         var authors = /author\s*=\s*(\{|\")(.*?)(\}|\"),?(\n|\r)/s.exec(contents[i]);
                         var url = /url\s*=\s*\"?\{?(.*?)(\"|\}),?(\n|\r)/g.exec(contents[i]);
@@ -86,10 +86,60 @@
                 }
             }
 
+            function replace_booktitle(booktitle){
+                if(/North American Chapter of the Association for Computational Linguistics/g.exec(booktitle)){
+                    return "NAACL";
+                }
+                if(/Empirical Methods in Natural Language Processing/g.exec(booktitle)){
+                    return "EMNLP";
+                }
+                if(/Transactions of the Association for Computational Linguistics/g.exec(booktitle)){
+                    return "TACL";
+                }
+                if(/International Conference on Computational Linguistics/g.exec(booktitle)){
+                    return "COLING";
+                }
+                if(/Language Resources and Evaluation/g.exec(booktitle)){
+                    return "LREC";
+                }
+                if(/European Chapter of the Association for Computational Linguistics/g.exec(booktitle)){
+                    return "EACL";
+                }
+                if(/Conference on Computational Natural Language Learning/g.exec(booktitle)){
+                    return "CoNLL";
+                }
+                if(/International Conference on Learning Representations/g.exec(booktitle)){
+                    return "ICLR";
+                }
+                if(/Neural Information Processing Systems/g.exec(booktitle)){
+                    return "NeurlIPS";
+                }
+                if(/International Conference on Machine Learning/g.exec(booktitle)){
+                    return "ICML";
+                }
+                if(/Association for Computational Linguistics/g.exec(booktitle)){
+                    return "ACL";
+                }
+                if(/IEEE/g.exec(booktitle)){
+                    return "IEEE";
+                }
+                if(/Building Educational Applications/g.exec(booktitle)){
+                    return "BEA";
+                }
+
+
+                return booktitle;
+                // Template
+                // if(//g.exec(booktitle)){
+                //     return "";
+                // }
+            }
+
             function process_paper_info(paper_info){
                 paper_info.title = paper_info.title.replace(/({|})/g, '');
                 paper_info.authors = paper_info.authors.replace(/({|})/g, '');
                 paper_info.booktitle = paper_info.booktitle.replace(/({|})/g, '');
+                paper_info.booktitle = replace_booktitle(paper_info.booktitle);
                 return paper_info;
             }
 
@@ -200,12 +250,12 @@
              <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Authors</th>
-                        <th>Conference / Booktitle</th>
+                        <th style="width:15%">Title</th>
+                        <th style="width:15%">Authors</th>
+                        <th style="width:15%">Conference / Booktitle</th>
                         <th style="width:7%">Year</th>
-                        <th>Link</th>
-                        <th style="width:30%">Comment</th>
+                        <th style="width:7%">Link</th>
+                        <th>Comment</th>
                     </tr>
                     <tr>
                         <th>
