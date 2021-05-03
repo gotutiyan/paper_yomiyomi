@@ -93,6 +93,9 @@
                 if(/Empirical Methods in Natural Language Processing/g.exec(booktitle)){
                     return "EMNLP";
                 }
+                if(/Findings/g.exec(booktitle)){
+                    return "EMNLP Findings";
+                }
                 if(/Transactions of the Association for Computational Linguistics/g.exec(booktitle)){
                     return "TACL";
                 }
